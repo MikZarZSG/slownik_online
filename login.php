@@ -30,7 +30,7 @@
             //Czy zalogowano?
             if($wynik->num_rows > 0) {
                 //Pomyślnie zalogowano
-                echo "<p>Pomyślnie zalogowano</p>";
+                header('Location: panel.php');
             } else {
                 //Nieprawidłowa nazwa użytkownika lub hasło
                 echo "<p>Nieprawidłowa nazwa użytkownika lub hasło!</p>";
