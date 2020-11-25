@@ -18,5 +18,7 @@
         echo "<p>${_SESSION['id']}</p>";
         echo "<p>${_SESSION['login']}</p>";
     ?>
+    
+    <p><a href="logout.php">Wyloguj się</a></p>
 </body>
 </html>
