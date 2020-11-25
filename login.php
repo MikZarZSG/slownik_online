@@ -1,4 +1,7 @@
 <?php
+    //Działanie zmiennych sesyjnych
+    session_start();
+    
     //Pobranie loginu i hasła z formularza
     $login = $_POST['login'];
     $haslo = $_POST['haslo'];
@@ -24,19 +27,28 @@
         //Wykonanie zapytania SQL
         $wynik = $polaczenie->query($sql);
         
-        //Czy zapytanie wykonało się poprawnie?
+        //Pomyślnie wykonano zapytanie
         if($wynik) {
-            //Pomyślnie wykonano zapytanie
-            //Czy zalogowano?
+            //Pomyślnie zalogowano
             if($wynik->num_rows > 0) {
-                //Pomyślnie zalogowano
+                //Usunięcie komunikatu o błędzie
+                if(isset($_SESSION['e_login'])) unset($_SESSION['e_login']);
+                
+                //Przekierowanie do panelu użytkownika
                 header('Location: panel.php');
-            } else {
-                //Nieprawidłowa nazwa użytkownika lub hasło
-                echo "<p>Nieprawidłowa nazwa użytkownika lub hasło!</p>";
             }
-        } else {
-            //Błąd w wykonaniu zapytania
+            //Nieprawidłowa nazwa użytkownika lub hasło
+            else {
+                //Komunikat o błędzie
+                $_SESSION['e_login'] =
+                    '<span class="error">Nieprawidłowa nazwa użytkownika lub hasło!</span>';
+                
+                //Przekierowanie do panelu logowania
+                header('Location: index.php');
+            }
+        } 
+        //Błąd w wykonaniu zapytania
+        else {
             throw new Exception("Niepoprawne zapytanie do bazy danych!");
         }
         
@@ -45,7 +57,7 @@
     }
     //Wyjątki
     catch (Exception $e){
-        echo "<p>$e</p>";
+        echo '<span class="error">$e</span>';
     }
 
     
