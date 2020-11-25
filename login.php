@@ -1,6 +1,12 @@
-<?php
+<?php    
     //Działanie zmiennych sesyjnych
     session_start();
+
+    //Przekierowanie w przypadku braku danych logowania
+    if(!isset($_POST['login']) || !isset($_POST['haslo'])) {
+        header('Location: index.php');
+        exit();
+    }
     
     //Pobranie loginu i hasła z formularza
     $login = $_POST['login'];
