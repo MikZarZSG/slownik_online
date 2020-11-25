@@ -1,3 +1,8 @@
+<?php
+    //Działanie zmiennych sesyjnych
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -8,5 +13,10 @@
 </head>
 <body>
     <p>Witaj!</p>
+    
+    <?php
+        echo "<p>${_SESSION['id']}</p>";
+        echo "<p>${_SESSION['login']}</p>";
+    ?>
 </body>
 </html>

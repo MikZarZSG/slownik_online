@@ -31,6 +31,11 @@
         if($wynik) {
             //Pomyślnie zalogowano
             if($wynik->num_rows > 0) {
+                //Pobranie danych o użytkowniku do zmiennych sesyjnych
+                $wiersz = $wynik->fetch_assoc();
+                $_SESSION['id'] = $wiersz['id'];
+                $_SESSION['login'] = $wiersz['login'];
+                
                 //Usunięcie komunikatu o błędzie
                 if(isset($_SESSION['e_login'])) unset($_SESSION['e_login']);
                 
