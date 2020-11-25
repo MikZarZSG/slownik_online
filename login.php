@@ -36,6 +36,9 @@
                 $_SESSION['id'] = $wiersz['id'];
                 $_SESSION['login'] = $wiersz['login'];
                 
+                //Zmienna sesyjna dot. stanu zalogowania
+                $_SESSION['czy_zalogowany'] = true;
+                
                 //Usunięcie komunikatu o błędzie
                 if(isset($_SESSION['e_login'])) unset($_SESSION['e_login']);
                 
