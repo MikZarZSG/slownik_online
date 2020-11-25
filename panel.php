@@ -11,12 +11,9 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <p>Witaj!</p>
-    
+<body>    
     <?php
-        echo "<p>${_SESSION['id']}</p>";
-        echo "<p>${_SESSION['login']}</p>";
+        echo "<p>Witaj <b>${_SESSION['login']}</b></p>";
     ?>
     
     <p><a href="logout.php">Wyloguj się</a></p>
