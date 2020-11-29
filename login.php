@@ -39,7 +39,7 @@
             if($wynik->num_rows > 0) {
                 //Pobranie danych o użytkowniku do zmiennych sesyjnych
                 $wiersz = $wynik->fetch_assoc();
-                $_SESSION['id'] = $wiersz['id'];
+                $_SESSION['id_u'] = $wiersz['id'];
                 $_SESSION['login'] = $wiersz['login'];
                 
                 //Zmienna sesyjna dot. stanu zalogowania

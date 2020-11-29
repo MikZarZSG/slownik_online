@@ -20,7 +20,8 @@
 <body>    
     <?php
         //Powitanie użytkownika
-        echo "<p>Witaj <b>${_SESSION['login']}</b></p>";
+        $login = $_SESSION['login'];
+        echo "<p>Witaj <b>$login</b></p>";
     ?>
     
     <p>
@@ -39,6 +40,8 @@
             }
             
             //Operacje na BD
+            $id_u = $_SESSION['id_u'];
+            echo "<p>$id_u</p>";
             
             //Zamknięcie połączenia
             $polaczenie->close();
