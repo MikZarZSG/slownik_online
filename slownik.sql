@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Lis 2020, 09:03
+-- Czas generowania: 29 Lis 2020, 16:45
 -- Wersja serwera: 10.4.10-MariaDB
 -- Wersja PHP: 7.3.12
 
@@ -36,6 +36,22 @@ CREATE TABLE `slowa` (
   `notatka` text COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+--
+-- Zrzut danych tabeli `slowa`
+--
+
+INSERT INTO `slowa` (`id`, `id_uzytkownik`, `slowo`, `tlumaczenie`, `notatka`) VALUES
+(1, 1, 'longsword', 'miecz długi', ''),
+(2, 1, 'coat of plates', 'pancerz typu płaty', ''),
+(3, 2, 'network', 'sieć komputerowa', ''),
+(4, 2, 'switch', 'switch, przełącznik', ''),
+(5, 1, 'lance', 'kopia rycerska', ''),
+(6, 2, 'netmask', 'maska podsieci', ''),
+(7, 2, 'router', 'router, trasownik', ''),
+(8, 1, 'warhammer', 'młot rycerski, nadziak', ''),
+(9, 1, 'charge', 'szarżować', ''),
+(10, 1, 'retreat', 'odwrót', '');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +64,14 @@ CREATE TABLE `uzytkownicy` (
   `login` varchar(25) COLLATE utf8_polish_ci NOT NULL,
   `haslo` text COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `uzytkownicy`
+--
+
+INSERT INTO `uzytkownicy` (`id`, `email`, `login`, `haslo`) VALUES
+(1, 'adam@gmail.com', 'adam', 'zaq1@WSX'),
+(2, 'ola@o2.pl', 'ola', 'qwerty123');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -74,13 +98,13 @@ ALTER TABLE `uzytkownicy`
 -- AUTO_INCREMENT dla tabeli `slowa`
 --
 ALTER TABLE `slowa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ograniczenia dla zrzutów tabel
