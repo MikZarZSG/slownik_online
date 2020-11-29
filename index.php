@@ -2,7 +2,7 @@
     //Działanie zmiennych sesyjnych
     session_start();
 
-    //Przekierowanie w przypadku, gdy jużytkownik jest już zalogowany
+    //Przekierowanie w przypadku, gdy użytkownik jest już zalogowany
     if(isset($_SESSION['czy_zalogowany']) && $_SESSION['czy_zalogowany']) {
         header('Location: panel.php');
         exit();
