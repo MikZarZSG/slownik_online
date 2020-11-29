@@ -19,9 +19,34 @@
 </head>
 <body>    
     <?php
+        //Powitanie użytkownika
         echo "<p>Witaj <b>${_SESSION['login']}</b></p>";
     ?>
     
-    <p><a href="logout.php">Wyloguj się</a></p>
+    <p>
+        <a href="logout.php">Wyloguj się</a>
+    </p>
+    
+    <?php
+        try {
+            //Połączenie z BD
+            require_once 'dbconn.php';
+            $polaczenie = new mysqli($host, $user, $pass, $db);
+
+            //Błąd połączenia
+            if($polaczenie->connect_error) {
+                throw new Exception($polaczenie->connect_error);
+            }
+            
+            //Operacje na BD
+            
+            //Zamknięcie połączenia
+            $polaczenie->close();
+        }
+        //Wyjątki
+        catch(Exception $e) {
+            echo '<span class="error">$e</span>';
+        }
+    ?>
 </body>
 </html>
