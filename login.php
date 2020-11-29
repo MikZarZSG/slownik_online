@@ -2,7 +2,7 @@
     //Działanie zmiennych sesyjnych
     session_start();
 
-    //Przekierowanie w przypadku braku danych logowania
+    //Przekierowanie w przypadku braku ustawionych zmiennych sesyjnych z danymi logowania
     if(!isset($_POST['login']) || !isset($_POST['haslo'])) {
         header('Location: index.php');
         exit();
