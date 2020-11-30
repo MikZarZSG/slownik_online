@@ -98,10 +98,6 @@
                 $_SESSION['slowo'] = $wiersz['slowo'];
                 $_SESSION['tlumaczenie'] = $wiersz['tlumaczenie'];
                 $_SESSION['notatka'] = $wiersz['notatka'];
-                
-                echo "<p>${_SESSION['slowo']}</p>";
-                echo "<p>${_SESSION['tlumaczenie']}</p>";
-                echo "<p>${_SESSION['notatka']}</p>";
             }
             //Niepowodzenie
             else {
@@ -130,13 +126,28 @@
     <h2>Edytuj słowo</h2>
     <form action="edit.php" method="post">
         <div><label for="slowo">Słowo:</label></div>
-        <div><input type="text" name="slowo" id="slowo" required></div>
+        <div><input type="text" name="slowo" id="slowo" required value="<?php
+            if(isset($_SESSION['slowo'])) {
+                echo $_SESSION['slowo'];
+                unset($_SESSION['slowo']);
+            }
+        ?>"></div>
         
         <div><label for="tlumaczenie">Tłumaczenie:</label></div>
-        <div><input type="text" name="tlumaczenie" id="tlumaczenie" required></div>
+        <div><input type="text" name="tlumaczenie" id="tlumaczenie" required value="<?php
+            if(isset($_SESSION['tlumaczenie'])) {
+                echo $_SESSION['tlumaczenie'];
+                unset($_SESSION['tlumaczenie']);
+            }
+        ?>"></div>
         
         <div><label for="notatka">Notatka:</label></div>
-        <div><input type="text" name="notatka" id="notatka" size="50"></div>
+        <div><input type="text" name="notatka" id="notatka" size="50" value="<?php
+            if(isset($_SESSION['notatka'])) {
+                echo $_SESSION['notatka'];
+                unset($_SESSION['notatka']);
+            }
+        ?>"></div>
         
         <div><input type="submit" value="Edytuj"></div>
     </form>
