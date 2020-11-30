@@ -66,6 +66,12 @@
         //Powitanie użytkownika
         $login = $_SESSION['login'];
         echo '<p>Witaj <b>' . $login . '</b> | <a href="logout.php">Wyloguj się</a></p>';
+    
+        //Status dodania rekordu
+        if(isset($_SESSION['status'])) {
+            echo $_SESSION['status'];
+            unset($_SESSION['status']);
+        }
     ?>
     
     <h2>Dodaj słowo</h2>
@@ -83,12 +89,6 @@
     </form>
     
     <?php
-        //Status dodania rekordu
-        if(isset($_SESSION['status'])) {
-            echo $_SESSION['status'];
-            unset($_SESSION['status']);
-        }
-    
         try {
             //Połączenie z BD
             require_once 'dbconn.php';

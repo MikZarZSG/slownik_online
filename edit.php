@@ -99,5 +99,7 @@
         
         <div><input type="submit" value="Edytuj"></div>
     </form>
+    
+    <a href="panel.php">Wróć do panelu</a>
 </body>
 </html>
