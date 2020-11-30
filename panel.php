@@ -130,7 +130,7 @@ echo<<<END
         <td>${wiersz['slowo']}</td>
         <td>${wiersz['tlumaczenie']}</td>
         <td>${wiersz['notatka']}</td>
-        <td><a href="#">Edytuj</a></td>
+        <td><a href="edit.php?id=${wiersz['id']}">Edytuj</a></td>
         <td><a href="delete.php?id=${wiersz['id']}">Usuń</a></td>
     </tr>
 END;
