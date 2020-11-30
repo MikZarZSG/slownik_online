@@ -31,7 +31,15 @@
             INSERT INTO Slowa (id_uzytkownik, slowo, tlumaczenie, notatka)
             VALUES ($id_u, '$slowo', '$tlumaczenie', '$notatka')";
             
-            echo "<p>$sql</p>";
+            //Status dodawania rekordu do BD
+            //Dodano rekord
+            if($polaczenie->query($sql)) {
+                $_SESSION['i_status'] = '<span class="sukces">Pomyślnie dodano rekord</span>';
+            } 
+            //Problem z dodaniem rekordu
+            else {
+                $_SESSION['i_status'] = '<span class="error">Problem z dodaniem rekordu!</span>';
+            }
             
             //Zamknięcie połączenia
             $polaczenie->close();
@@ -40,12 +48,6 @@
         catch(Exception $e) {
             echo '<span class="error">' . $e . '</span>';
         }
-        
-        /*
-        echo "<p>${_POST['slowo']}</p>";
-        echo "<p>${_POST['tlumaczenie']}</p>";
-        echo "<p>${_POST['notatka']}</p>";
-        */
     }
 ?>
 
@@ -83,6 +85,12 @@
     </form>
     
     <?php
+        //Status dodania rekordu
+        if(isset($_SESSION['i_status'])) {
+            echo $_SESSION['i_status'];
+            unset($_SESSION['i_status']);
+        }
+    
         try {
             //Połączenie z BD
             require_once 'dbconn.php';
