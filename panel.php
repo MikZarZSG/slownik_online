@@ -10,9 +10,42 @@
 
     //Dodawanie danych do BD
     if(isset($_POST['slowo'])) {
+        try {
+            //Połączenie z BD
+            require_once 'dbconn.php';
+            $polaczenie = new mysqli($host, $user, $pass, $db);
+            
+            //Błąd połączenia
+            if($polaczenie->connect_error) {
+                throw new Exception($polaczenie->connect_error);
+            }
+            
+            //Pobranie potrzebnych danych
+            $id_u = $_SESSION['id_u'];
+            $slowo = $_POST['slowo'];
+            $tlumaczenie = $_POST['tlumaczenie'];
+            $notatka = $_POST['notatka'];
+            
+            //Zapytanie SQL - wstawienie nowego rekordu
+            $sql = "
+            INSERT INTO Slowa (id_uzytkownik, slowo, tlumaczenie, notatka)
+            VALUES ($id_u, '$slowo', '$tlumaczenie', '$notatka')";
+            
+            echo "<p>$sql</p>";
+            
+            //Zamknięcie połączenia
+            $polaczenie->close();
+        }
+        //Wyjątki
+        catch(Exception $e) {
+            echo '<span class="error">' . $e . '</span>';
+        }
+        
+        /*
         echo "<p>${_POST['slowo']}</p>";
         echo "<p>${_POST['tlumaczenie']}</p>";
         echo "<p>${_POST['notatka']}</p>";
+        */
     }
 ?>
 
@@ -60,7 +93,7 @@
                 throw new Exception($polaczenie->connect_error);
             }
             
-            //Operacje na BD
+            //Pobranie potrzebnych danych
             $id_u = $_SESSION['id_u'];
             
             //Zapytanie SQL - pobranie listy słów
