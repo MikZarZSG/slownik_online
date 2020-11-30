@@ -53,9 +53,32 @@
             
             //Poprawnie wykonano zapytanie
             if($wynik) {
+echo<<<END
+    <table>
+        <tr>
+            <th>Słowo</th>
+            <th>Tłumaczenie</th>
+            <th>Notatka</th>
+            <th>Edycja</th>
+            <th>Usuń</th>
+        </tr>
+END;
                 while($wiersz = $wynik->fetch_assoc()) {
-                    echo "<p>${wiersz['slowo']} | ${wiersz['tlumaczenie']}</p>";
+                    //echo "<p>${wiersz['slowo']} | ${wiersz['tlumaczenie']}</p>";
+                    
+echo<<<END
+    <tr>
+        <td>${wiersz['slowo']}</td>
+        <td>${wiersz['tlumaczenie']}</td>
+        <td>${wiersz['notatka']}</td>
+        <td><a href="#">Edytuj</a></td>
+        <td><a href="#">Usuń</a></td>
+    </tr>
+END;
                 }
+echo<<<END
+    </table>
+END;
             }
             //Błąd w wykonaniu zapytania
             else {
