@@ -4,12 +4,6 @@
     
     //Operacja - Edycja słowa
     if(isset($_POST['slowo'])) {
-        /*
-        echo "<p>${_POST['slowo']}</p>";
-        echo "<p>${_POST['tlumaczenie']}</p>";
-        echo "<p>${_POST['notatka']}</p>";
-        */
-        
         try {
             //Połączenie z BD
             require_once 'dbconn.php';
@@ -74,6 +68,53 @@
     //Pobranie danych do formularza
     else {
         $_SESSION['id'] = $_GET['id'];
+        
+        try {
+            //Połączenie z BD
+            require_once 'dbconn.php';
+            $polaczenie = new mysqli($host, $user, $pass, $db);
+            
+            //Błąd połączenia
+            if($polaczenie->connect_error) {
+                throw new Exception($polaczenie->connect_error);
+            }
+            
+            //Zapytanie SQL - Pobranie danych do formularza
+            $sql = "
+                SELECT slowo, tlumaczenie, notatka
+                FROM Slowa
+                WHERE id = ${_SESSION['id']}";
+            
+            //Wykonanie zapytania
+            $wynik = $polaczenie->query($sql);
+            
+            //Wynik zapytania
+            //Sukces - do zmiennych sesyjnych
+            if($wynik) {
+                //Fetchoanie wyniku
+                $wiersz = $wynik->fetch_assoc();
+                
+                //Dane do zmiennych sesyjnych
+                $_SESSION['slowo'] = $wiersz['slowo'];
+                $_SESSION['tlumaczenie'] = $wiersz['tlumaczenie'];
+                $_SESSION['notatka'] = $wiersz['notatka'];
+                
+                echo "<p>${_SESSION['slowo']}</p>";
+                echo "<p>${_SESSION['tlumaczenie']}</p>";
+                echo "<p>${_SESSION['notatka']}</p>";
+            }
+            //Niepowodzenie
+            else {
+                throw new Exception("Niepowodzenie podczas wykonywania zapytania!");
+            }
+            
+            //Zamknięcie połączenia
+            $polaczenie->close();
+        }
+        //Wyjątki
+        catch(Exception $e) {
+            echo '<span class="error">' . $e . '</span>';
+        }
     }
 ?>
 
