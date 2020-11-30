@@ -34,11 +34,11 @@
             //Status dodawania rekordu do BD
             //Dodano rekord
             if($polaczenie->query($sql)) {
-                $_SESSION['i_status'] = '<span class="sukces">Pomyślnie dodano rekord</span>';
+                $_SESSION['status'] = '<span class="sukces">Pomyślnie dodano rekord</span>';
             } 
             //Problem z dodaniem rekordu
             else {
-                $_SESSION['i_status'] = '<span class="error">Problem z dodaniem rekordu!</span>';
+                $_SESSION['status'] = '<span class="error">Problem z dodaniem rekordu!</span>';
             }
             
             //Zamknięcie połączenia
@@ -84,9 +84,9 @@
     
     <?php
         //Status dodania rekordu
-        if(isset($_SESSION['i_status'])) {
-            echo $_SESSION['i_status'];
-            unset($_SESSION['i_status']);
+        if(isset($_SESSION['status'])) {
+            echo $_SESSION['status'];
+            unset($_SESSION['status']);
         }
     
         try {
@@ -131,7 +131,7 @@ echo<<<END
         <td>${wiersz['tlumaczenie']}</td>
         <td>${wiersz['notatka']}</td>
         <td><a href="#">Edytuj</a></td>
-        <td><a href="#">Usuń</a></td>
+        <td><a href="delete.php?id=${wiersz['id']}">Usuń</a></td>
     </tr>
 END;
                 }
