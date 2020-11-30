@@ -7,6 +7,13 @@
         header('Location: index.php');
         exit();
     }
+
+    //Dodawanie danych do BD
+    if(isset($_POST['slowo'])) {
+        echo "<p>${_POST['slowo']}</p>";
+        echo "<p>${_POST['tlumaczenie']}</p>";
+        echo "<p>${_POST['notatka']}</p>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +34,20 @@
     <p>
         <a href="logout.php">Wyloguj się</a>
     </p>
+    
+    <h2>Dodaj słowo</h2>
+    <form action="panel.php" method="post">
+        <div><label for="slowo">Słowo:</label></div>
+        <div><input type="text" name="slowo" id="slowo"></div>
+        
+        <div><label for="tlumaczenie">Tłumaczenie:</label></div>
+        <div><input type="text" name="tlumaczenie" id="tlumaczenie"></div>
+        
+        <div><label for="notatka">Notatka:</label></div>
+        <div><input type="text" name="notatka" id="notatka" size="50"></div>
+        
+        <div><input type="submit" value="Dodaj"></div>
+    </form>
     
     <?php
         try {
@@ -54,6 +75,7 @@
             //Poprawnie wykonano zapytanie
             if($wynik) {
 echo<<<END
+    <h2>Lista słów</h2>
     <table>
         <tr>
             <th>Słowo</th>
