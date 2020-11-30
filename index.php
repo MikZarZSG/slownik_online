@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Zaloguj się</h1>
+    <h2>Słownik online - zaloguj się</h2>
     
     <form action="login.php" method="post">
         <div><label for="login">Login:</label></div>

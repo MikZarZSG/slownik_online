@@ -59,24 +59,22 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body>    
+<body>
+    <h2>Słownik online - panel użytkownika</h2>
+    
     <?php
         //Powitanie użytkownika
         $login = $_SESSION['login'];
-        echo "<p>Witaj <b>$login</b></p>";
+        echo '<p>Witaj <b>' . $login . '</b> | <a href="logout.php">Wyloguj się</a></p>';
     ?>
-    
-    <p>
-        <a href="logout.php">Wyloguj się</a>
-    </p>
     
     <h2>Dodaj słowo</h2>
     <form action="panel.php" method="post">
         <div><label for="slowo">Słowo:</label></div>
-        <div><input type="text" name="slowo" id="slowo"></div>
+        <div><input type="text" name="slowo" id="slowo" required></div>
         
         <div><label for="tlumaczenie">Tłumaczenie:</label></div>
-        <div><input type="text" name="tlumaczenie" id="tlumaczenie"></div>
+        <div><input type="text" name="tlumaczenie" id="tlumaczenie" required></div>
         
         <div><label for="notatka">Notatka:</label></div>
         <div><input type="text" name="notatka" id="notatka" size="50"></div>
