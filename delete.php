@@ -25,10 +25,29 @@
                 throw new Exception($polaczenie->connect_error);
             }
             
-            echo "Hello!";
+            //Pobranie danych
+            $id = $_GET['id'];
+            
+            //Zapytanie SQL - Usunięcie rekordu
+            $sql = "
+            DELETE FROM Slowa
+            WHERE id = $id";
+            
+            //Usunięcie rekordu z bazy danych - tabela Slowa
+            //Pomyślnie usunieto rekord
+            if($polaczenie->query($sql)) {
+                $_SESSION['status'] = '<span class="sukces">Pomyślnie usunięto rekord</span>';
+            }
+            //Błąd podczas usuwania rekordu
+            else {
+                $_SESSION['status'] = '<span class="error">Problem z usunięciem rekordu!</span>';
+            }
             
             //Zamknięcie połączenia
             $polaczenie->close();
+            
+            //Powrót do panelu
+            header('Location: panel.php');
         }
         //Wyjątki
         catch(Exception $e) {
