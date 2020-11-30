@@ -4,9 +4,60 @@
     
     //Operacja - Edycja słowa
     if(isset($_POST['slowo'])) {
+        /*
         echo "<p>${_POST['slowo']}</p>";
         echo "<p>${_POST['tlumaczenie']}</p>";
         echo "<p>${_POST['notatka']}</p>";
+        */
+        
+        try {
+            //Połączenie z BD
+            require_once 'dbconn.php';
+            $polaczenie = new mysqli($host, $user, $pass, $db);
+            
+            //Błąd połączenia
+            if($polaczenie->connect_error) {
+                throw new Exception($polaczenie->connect_error);
+            }
+            
+            //Pobranie danych
+            $id = $_SESSION['id'];
+            $slowo = $_POST['slowo'];
+            $tlumaczenie = $_POST['tlumaczenie'];
+            $notatka = $_POST['notatka'];
+            
+            //Zapytanie SQL - aktualizacja danych
+            $sql = "
+                UPDATE Slowa
+                SET
+                    slowo = '$slowo',
+                    tlumaczenie = '$tlumaczenie',
+                    notatka = '$notatka'
+                WHERE id = $id";
+            
+            //Aktualizacja rekordu w tabeli Slowa
+            //Pomyślnie zaktualizowano rekord
+            if($polaczenie->query($sql)) {
+                $_SESSION['status'] = '<span class="sukces">Pomyślnie zaktualizowano rekord</span>';
+            }
+            //Błąd podczas aktualizacji rekordu
+            else {
+                $_SESSION['status'] = '<span class="error">Problem z aktualizacją rekordu!</span>';
+            }
+            
+            //Usunięcie zmiennych
+            unset($_SESSION['id']);
+            
+            //Zamknięcie połączenia
+            $polaczenie->close();
+            
+            //Powrót do panelu
+            header('Location: panel.php');
+        }
+        //Wyjątki
+        catch(Exception $e) {
+            echo '<span class="error">' . $e . '</span>';
+        }
     }
 
     //Przekierowanie w przypadku, gdy użytkownik NIE jest zalogowany
@@ -22,7 +73,7 @@
     }
     //Pobranie danych do formularza
     else {
-        echo $_GET['id'];
+        $_SESSION['id'] = $_GET['id'];
     }
 ?>
 
