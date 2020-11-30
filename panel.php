@@ -64,8 +64,6 @@ echo<<<END
         </tr>
 END;
                 while($wiersz = $wynik->fetch_assoc()) {
-                    //echo "<p>${wiersz['slowo']} | ${wiersz['tlumaczenie']}</p>";
-                    
 echo<<<END
     <tr>
         <td>${wiersz['slowo']}</td>
@@ -84,8 +82,6 @@ END;
             else {
                 throw new Exception("Błąd wykonania zapytania");
             }
-            
-            //echo var_dump($wynik);
             
             //Zamknięcie połączenia
             $polaczenie->close();
