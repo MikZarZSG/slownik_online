@@ -41,14 +41,35 @@
             
             //Operacje na BD
             $id_u = $_SESSION['id_u'];
-            echo "<p>$id_u</p>";
+            
+            //Zapytanie SQL - pobranie listy słów
+            $sql = "
+                SELECT id, slowo, tlumaczenie, notatka 
+                FROM Slowa
+                WHERE id_uzytkownik = $id_u";
+            
+            //Wykonanie zapytania
+            $wynik = $polaczenie->query($sql);
+            
+            //Poprawnie wykonano zapytanie
+            if($wynik) {
+                while($wiersz = $wynik->fetch_assoc()) {
+                    echo "<p>${wiersz['slowo']} | ${wiersz['tlumaczenie']}</p>";
+                }
+            }
+            //Błąd w wykonaniu zapytania
+            else {
+                throw new Exception("Błąd wykonania zapytania");
+            }
+            
+            //echo var_dump($wynik);
             
             //Zamknięcie połączenia
             $polaczenie->close();
         }
         //Wyjątki
         catch(Exception $e) {
-            echo '<span class="error">$e</span>';
+            echo '<span class="error">' . $e . '</span>';
         }
     ?>
 </body>
